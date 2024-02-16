@@ -1,0 +1,30 @@
+.flex {
+    display: flex;
+}
+
+.justifyBetween {
+    justify-content: space-between;
+}
+
+.justifyEvenly {
+    justify-content: space-evenly;
+
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.alignItemsCenter {
+    align-items: center;
+}
+
+.paper {
+    padding: 10px;
+    margin: 10px;
+}
+
+Link {
+    color: white;
+    text-decoration: none;
+}
