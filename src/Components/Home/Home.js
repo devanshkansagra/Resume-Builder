@@ -43,7 +43,7 @@ function Home() {
       <Box className={`${styles.flex} ${styles.justifyCenter} ${styles.mt3}`}>
         <ThemeProvider theme={darkTheme}>
           <Button variant='contained'>
-            <Link to='/personal-info' className={`${styles.link}`}>Create Resume</Link>
+            <Link to='/editor' className={`${styles.link}`}>Create Resume</Link>
           </Button>
         </ThemeProvider>
       </Box>
