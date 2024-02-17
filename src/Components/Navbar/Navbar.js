@@ -16,8 +16,8 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import styles from './navbar.module.css';
 
-const pages = ['Home', 'About', 'Template Preview'];
-const links = ['', 'about', 'template'];
+const pages = ['Home', 'About'];
+const links = ['', 'about'];
 const settings = ['Profile', 'Logout', 'Login', 'SignUp'];
 const profileLinks = ['profile', 'logout', 'login', 'signup'];
 

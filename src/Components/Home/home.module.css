@@ -1,0 +1,28 @@
+.mt3 {
+    margin-top: 3rem;
+}
+
+.mt5 {
+    margin-top: 5rem;
+}
+
+.mt10 {
+    margin-top: 10rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.justifyCenter {
+    justify-content: center;
+}
+
+.link {
+    text-decoration: none;
+    color: white
+}
+
+.p4 {
+    padding: 4rem;
+}

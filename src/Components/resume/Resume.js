@@ -1,13 +1,13 @@
 import React, { useRef } from 'react'
 import { Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import Button from '@mui/material/Button';
-import ReactToPrint from 'react-to-print';
+// import Button from '@mui/material/Button';
+// import ReactToPrint from 'react-to-print';
 import styles from './resume.module.css';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
-import Container from '@mui/material/Container';
+// import Container from '@mui/material/Container';
 
 function Resume(props) {
 
@@ -107,19 +107,7 @@ function Resume(props) {
 
                 </div>
             </div>
-            <div>
-                <ReactToPrint
-                    trigger={() => {
-                        return (
-                            <Button variant='contained'>
-                                Download Template
-                            </Button>
-                        );
-                    }}
-                    content={() => pdfRef.current}
-                />
-            </div>
-
+            
         </>
     )
 }
