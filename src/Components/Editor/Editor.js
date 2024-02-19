@@ -52,6 +52,11 @@ function Editor() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const [personalData, setpersonalData] = React.useState({});
+    const getPersonal = (personalData) => {
+        setpersonalData(personalData)
+    }
     return (
         <>
             <Box
@@ -69,7 +74,7 @@ function Editor() {
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
-                            <Personal />
+                            <Personal getPersonal={getPersonal}/>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
                             <Skills />
@@ -86,7 +91,7 @@ function Editor() {
                     </Box>
                 </Paper>
                 <Paper elevation={5} className='template'>
-                    <Resume />
+                    <Resume props={personalData}/>
                 </Paper>
             </Box>
         </>

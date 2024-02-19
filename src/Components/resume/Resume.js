@@ -9,7 +9,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 // import Container from '@mui/material/Container';
 
-function Resume(props) {
+function Resume({props}) {
 
     const pdfRef = useRef();
     return (
@@ -19,7 +19,7 @@ function Resume(props) {
             <div className={styles.paper} ref={pdfRef}>
                 <div>
                     <div className={styles.name}>
-                        <Typography variant='h3' color='textSecondary' fontWeight={'bold'}>{props.name || 'Your Name'}</Typography>
+                        <Typography variant='h3' color='textSecondary' fontWeight={'bold'}>{props.firstName || 'Your'} {props.lastName || 'Name'}</Typography>
                     </div>
                     <br />
                     <div className={`${styles.flex} ${styles.justifyBetween}`}>
@@ -37,7 +37,7 @@ function Resume(props) {
                         </div>
                         <div className={styles.flex}>
                             <MailIcon fontSize='small'></MailIcon>
-                            <Typography><a href='/'>&nbsp;{props.mail || 'Your Mail'}</a></Typography>
+                            <Typography><a href='/'>&nbsp;{props.email || 'Your Mail'}</a></Typography>
                         </div>
                     </div>
                 </div>

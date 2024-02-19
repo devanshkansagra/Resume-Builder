@@ -7,11 +7,34 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import { Link } from 'react-router-dom'
+// import PropTypes from 'prop-types';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
 
-export default function Personal() {
+export default function Personal(props) {
+
+  const [personalData, setPersonalData] = React.useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      github: "",
+      linkedin: "",
+  })
+
+  let name, value;
+  const handlePersonalData = (e) => {
+      name = e.target.name;
+      value = e.target.value;
+
+      setPersonalData({...personalData, [name]:value});
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.getPersonal(personalData);
+  }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box component="main" maxWidth="xs">
@@ -40,6 +63,7 @@ export default function Personal() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handlePersonalData}
                   // autofocus
                 />
               </Grid>
@@ -54,6 +78,7 @@ export default function Personal() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={handlePersonalData}
                 />
               </Grid>
 
@@ -62,11 +87,12 @@ export default function Personal() {
                 <TextField
                   // autofocus
                   autoComplete="given-name"
-                  name="emailId"
+                  name="email"
                   required
                   fullWidth
                   id="emailId"
                   label="Email Address"
+                  onChange={handlePersonalData}
                 />
               </Grid>
 
@@ -78,7 +104,8 @@ export default function Personal() {
                   fullWidth
                   id="phoneNumber"
                   label="Phone Number"
-                  name="phoneNumber"
+                  name="phone"
+                  onChange={handlePersonalData}
                 />
               </Grid>
 
@@ -91,6 +118,7 @@ export default function Personal() {
                   fullWidth
                   id="github"
                   label="Github Profile"
+                  onChange={handlePersonalData}
                   // autofocus
                 />
               </Grid>
@@ -103,8 +131,9 @@ export default function Personal() {
                   fullWidth
                   id="linkedin"
                   label="LinkedIn Profile"
-                  name="lastName"
+                  name="linkedin"
                   autoComplete="family-name"
+                  onChange={handlePersonalData}
                 />
               </Grid>
             </Grid>
@@ -113,6 +142,7 @@ export default function Personal() {
                 type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Save
               </Button>
