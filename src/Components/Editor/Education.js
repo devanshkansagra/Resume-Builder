@@ -10,7 +10,25 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
-function Projects() {
+function Education(edu) {
+
+    const [education, setEducation] = React.useState({
+        edtitle: "",
+        insName: "",
+        tenure: "",
+        qualification: "",
+        scores: ""
+    })
+
+    const handleInputs = (e) => {
+        setEducation({...education, [e.target.name]: e.target.value});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        edu.getEducation(education);
+    }
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box component="main" maxWidth="xs">
@@ -42,7 +60,8 @@ function Projects() {
                                 fullWidth
                                 id="edtitle"
                                 label="Education Title"
-                                // autofocus
+                                onChange={handleInputs}
+                            // autofocus
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -53,6 +72,7 @@ function Projects() {
                                 fullWidth
                                 id="insName"
                                 label="Institution Name"
+                                onChange={handleInputs}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -63,6 +83,7 @@ function Projects() {
                                 fullWidth
                                 id="tenure"
                                 label="Education Tenure"
+                                onChange={handleInputs}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -73,6 +94,7 @@ function Projects() {
                                 fullWidth
                                 id="Qualification"
                                 label="Education Qualification"
+                                onChange={handleInputs}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -89,15 +111,16 @@ function Projects() {
 
 
                     </Grid>
-                    <Box className={`${styles.flex} ${styles.justifyBetween}`}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Save
-                        </Button>
-                    </Box>
+                </Box>
+                <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={handleSubmit}
+                    >
+                        Save
+                    </Button>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
@@ -105,4 +128,4 @@ function Projects() {
     );
 }
 
-export default Projects
+export default Education

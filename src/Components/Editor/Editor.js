@@ -56,6 +56,8 @@ function Editor() {
     const [personalData, setpersonalData] = React.useState({});
     const [skill, setSkill] = React.useState({});
     const [experience, setExp] = React.useState({});
+    const [education, setEdu] = React.useState({});
+    const [project, setProj] = React.useState({});
 
     const getData = (personalData) => {
         setpersonalData(personalData)
@@ -67,6 +69,14 @@ function Editor() {
 
     const getExp = (exp) => {
         setExp(exp);
+    }
+
+    const getEducation = (edu) => {
+        setEdu(edu);
+    }
+
+    const getProject = (proj) => {
+        setProj(proj);
     }
     return (
         <>
@@ -85,24 +95,30 @@ function Editor() {
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
-                            <Personal getData={getData}/>
+                            <Personal getData={getData} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <Skills getSkill={getSkill}/>
+                            <Skills getSkill={getSkill} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
-                            <Experience getExp={getExp}/>
+                            <Experience getExp={getExp} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={3}>
-                            <Projects />
+                            <Projects getProject={getProject} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={4}>
-                            <Education />
+                            <Education getEducation={getEducation}/>
                         </CustomTabPanel>
                     </Box>
                 </Paper>
                 <Paper elevation={5} className='template'>
-                    <Resume personal={personalData} skills={skill} exp={experience}/>
+                    <Resume
+                        personal={personalData}
+                        skills={skill}
+                        exp={experience} 
+                        proj={project}
+                        edu={education}
+                    />
                 </Paper>
             </Box>
         </>

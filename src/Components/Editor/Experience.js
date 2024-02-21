@@ -89,45 +89,6 @@ function Experience(exp) {
 
                     </Grid>
                 </Box>
-                {exps.map((data) => {
-                    return (
-                        <Box component="form" noValidate sx={{ mt: 3 }}>
-                            <Grid container spacing={2}>
-
-                                {/* Languages */}
-                                <Grid item xs={12}>
-                                    <TextField
-                                        autoComplete="given-name"
-                                        name="exptitle"
-                                        required
-                                        fullWidth
-                                        id="exptitle"
-                                        label="Experience Title"
-                                        // autofocus
-                                        onChange={handleInputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        autoComplete="given-name"
-                                        name="expdescription"
-                                        required
-                                        fullWidth
-                                        id="expdescription"
-                                        label="Experience Description"
-                                        // autofocus
-                                        multiline
-                                        rows={6}
-                                        onChange={handleInputs}
-                                    />
-                                </Grid>
-
-
-
-                            </Grid>
-                        </Box>
-                    )
-                })}
                 <Box className={`${styles.flex} ${styles.justifyBetween}`}>
                     <Button
                         type="submit"

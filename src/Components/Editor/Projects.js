@@ -9,7 +9,21 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
-function Projects() {
+function Projects(proj) {
+
+    const [projects, setProjects] = React.useState({
+        projtitle: "",
+        projdescription: "",
+    });
+
+    const handleInputs = (e) => {
+        setProjects({...projects, [e.target.name]: e.target.value});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        proj.getProject(projects);
+    }
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box component="main" maxWidth="xs">
@@ -36,24 +50,26 @@ function Projects() {
                         <Grid item xs={12}>
                             <TextField
                                 autoComplete="given-name"
-                                name="title"
+                                name="projtitle"
                                 required
                                 fullWidth
                                 id="title"
                                 label="Project Title"
+                                onChange={handleInputs}
                                 // autofocus
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 autoComplete="given-name"
-                                name="description"
+                                name="projdescription"
                                 required
                                 fullWidth
                                 id="description"
                                 label="Project Description"
                                 // autofocus
                                 multiline
+                                onChange={handleInputs}
                                 rows={6}
                             />
                         </Grid>
@@ -66,6 +82,7 @@ function Projects() {
                             type="submit"
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            onClick={handleSubmit}
                         >
                             Save
                         </Button>

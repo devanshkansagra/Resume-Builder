@@ -87,9 +87,9 @@ function Resume({personal, skills, proj, edu, exp, props}) {
                 {/* Projects Section */}
                 <div>
                     <Typography fontWeight={'bold'}>Projects</Typography>
-                    <Typography>{props?.ProjTitle || 'Project 1'}</Typography>
+                    <Typography>{proj?.projtitle || 'Project 1'}</Typography>
                     <Typography paragraph color={'textSecondary'}>
-                        {props?.ProjDescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
+                        {proj?.projdescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
                     </Typography>
                 </div>
                 <br />
@@ -98,11 +98,11 @@ function Resume({personal, skills, proj, edu, exp, props}) {
                 {/* Education Section */}
                 <div>
                     <Typography fontWeight={'bold'}>Education</Typography>
-                    <Typography>{props?.EdTitle || 'Education 1'}</Typography>
+                    <Typography>{edu?.edtitle || 'Education 1'}</Typography>
                     <Typography>
-                        {props?.EdDescription || 'Stanford University'} - {props?.EdDuration || '2019-2023'}
-                        <Typography color={'textSecondary'}>{props?.EdDegree || 'BTech in Computer Science'}</Typography>
-                        <Typography color={'textSecondary'}>{props?.EdGrades || '9.9 CGPA'}</Typography>
+                        {edu.insName || 'Stanford University'} - {edu?.tenure || '2019-2023'}
+                        <Typography color={'textSecondary'}>{edu?.qualification || 'BTech in Computer Science'}</Typography>
+                        <Typography color={'textSecondary'}>{edu?.scores || '9.9 CGPA'}</Typography>
                     </Typography>
 
                 </div>
