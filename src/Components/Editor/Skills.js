@@ -10,9 +10,23 @@ import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
 
-export default function Skills() {
+export default function Skills(props) {
 
+    const [skillsData, setSkillsData] = React.useState({
+        languages: "",
+        techFrameworks: "",
+        designFrameworks: "",
+        concepts: "",
+    })
+    const handleInputs = (e) => {
+        setSkillsData({...skillsData, [e.target.name]:e.target.value});
+    }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(skillsData);
+        props.getSkill(skillsData);
+    }
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box component="main" maxWidth="xs">
@@ -36,11 +50,12 @@ export default function Skills() {
                             <Grid item xs={12}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="languages"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="languages"
                                     label="Languages"
+                                    onChange={handleInputs}
                                     // autofocus
                                 />
                             </Grid>
@@ -55,6 +70,7 @@ export default function Skills() {
                                     fullWidth
                                     id="techFrameworks"
                                     label="Technologies and Frameworks"
+                                    onChange={handleInputs}
                                     // autofocus
                                 />
                             </Grid>
@@ -64,10 +80,11 @@ export default function Skills() {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastName"
+                                    id="designFrameworks"
                                     label="Designing Frameworks"
-                                    name="lastName"
+                                    name="designFrameworks"
                                     autoComplete="family-name"
+                                    onChange={handleInputs}
                                 />
                             </Grid>
 
@@ -76,11 +93,12 @@ export default function Skills() {
                                 {/* <Typography variant="h6">Languages</Typography> */}
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="concepts"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="concepts"
                                     label="Programming Concepts"
+                                    onChange={handleInputs}
                                     // autofocus
                                 />
                             </Grid>
@@ -92,6 +110,7 @@ export default function Skills() {
                                 type="submit"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
+                                onClick={handleSubmit}
                             >
                                 Save
                             </Button>

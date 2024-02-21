@@ -12,7 +12,7 @@ import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
 
-export default function Personal(props) {
+export default function Personal(personal) {
 
   const [personalData, setPersonalData] = React.useState({
       firstName: "",
@@ -33,7 +33,7 @@ export default function Personal(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.getPersonal(personalData);
+    personal.getData(personalData);
   }
   return (
     <ThemeProvider theme={defaultTheme}>

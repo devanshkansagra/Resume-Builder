@@ -9,7 +9,32 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
-function Experience() {
+function Experience(exp) {
+
+    const [experience, setExperience] = React.useState({
+        exptitle: "",
+        expdescription: "",
+    });
+
+    const [exps, setExps] = React.useState([]);
+    const addExperience = () => {
+        const add = [...exps, []];
+        console.log(add);
+        setExps(add);
+    }
+
+    const handleInputs = (e) => {
+        setExperience({ ...experience, [e.target.name]: e.target.value });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(experience);
+        setExps(experience);
+        console.log(experience)
+        exp.getExp(experience);
+    }
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box component="main" maxWidth="xs">
@@ -28,7 +53,7 @@ function Experience() {
                     </Typography>
 
                 </Box>
-                <Button variant='contained'>Add Experience</Button>
+                <Button variant='contained' onClick={addExperience}>Add Experience</Button>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
 
@@ -36,40 +61,82 @@ function Experience() {
                         <Grid item xs={12}>
                             <TextField
                                 autoComplete="given-name"
-                                name="experience"
+                                name="exptitle"
                                 required
                                 fullWidth
-                                id="experience"
+                                id="exptitle"
                                 label="Experience Title"
                                 // autofocus
+                                onChange={handleInputs}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 autoComplete="given-name"
-                                name="experienceDesc"
+                                name="expdescription"
                                 required
                                 fullWidth
-                                id="experienceDesc"
+                                id="expdescription"
                                 label="Experience Description"
                                 // autofocus
                                 multiline
                                 rows={6}
+                                onChange={handleInputs}
                             />
                         </Grid>
 
 
 
                     </Grid>
-                    <Box className={`${styles.flex} ${styles.justifyBetween}`}>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Save
-                        </Button>
-                    </Box>
+                </Box>
+                {exps.map((data) => {
+                    return (
+                        <Box component="form" noValidate sx={{ mt: 3 }}>
+                            <Grid container spacing={2}>
+
+                                {/* Languages */}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="exptitle"
+                                        required
+                                        fullWidth
+                                        id="exptitle"
+                                        label="Experience Title"
+                                        // autofocus
+                                        onChange={handleInputs}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="expdescription"
+                                        required
+                                        fullWidth
+                                        id="expdescription"
+                                        label="Experience Description"
+                                        // autofocus
+                                        multiline
+                                        rows={6}
+                                        onChange={handleInputs}
+                                    />
+                                </Grid>
+
+
+
+                            </Grid>
+                        </Box>
+                    )
+                })}
+                <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={handleSubmit}
+                    >
+                        Save
+                    </Button>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>

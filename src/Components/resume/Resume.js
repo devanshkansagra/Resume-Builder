@@ -9,7 +9,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 // import Container from '@mui/material/Container';
 
-function Resume({props}) {
+function Resume({personal, skills, proj, edu, exp, props}) {
 
     const pdfRef = useRef();
     return (
@@ -19,25 +19,25 @@ function Resume({props}) {
             <div className={styles.paper} ref={pdfRef}>
                 <div>
                     <div className={styles.name}>
-                        <Typography variant='h3' color='textSecondary' fontWeight={'bold'}>{props.firstName || 'Your'} {props.lastName || 'Name'}</Typography>
+                        <Typography variant='h3' color='textSecondary' fontWeight={'bold'}>{personal.firstName || 'Your'} {personal.lastName || 'Name'}</Typography>
                     </div>
                     <br />
                     <div className={`${styles.flex} ${styles.justifyBetween}`}>
                         <div className={styles.flex}>
                             <GitHubIcon fontSize='small'></GitHubIcon>
-                            <Typography><a href='/'>&nbsp;{props.github || 'Your Github'}</a></Typography>
+                            <Typography><a href='/'>&nbsp;{personal.github || 'Your Github'}</a></Typography>
                         </div>
                         <div className={styles.flex}>
                             <LinkedInIcon fontSize='small'></LinkedInIcon>
-                            <Typography><a href='/'>&nbsp;{props.linkedin || 'Your LinkedIn'}</a></Typography>
+                            <Typography><a href='/'>&nbsp;{personal.linkedin || 'Your LinkedIn'}</a></Typography>
                         </div>
                         <div className={styles.flex}>
                             <PhoneIcon fontSize='small'></PhoneIcon>
-                            <Typography><div>&nbsp;{props.phone || 'Your Phone'}</div></Typography>
+                            <Typography><div>&nbsp;{personal.phone || 'Your Phone'}</div></Typography>
                         </div>
                         <div className={styles.flex}>
                             <MailIcon fontSize='small'></MailIcon>
-                            <Typography><a href='/'>&nbsp;{props.email || 'Your Mail'}</a></Typography>
+                            <Typography><a href='/'>&nbsp;{personal.email || 'Your Mail'}</a></Typography>
                         </div>
                     </div>
                 </div>
@@ -49,22 +49,22 @@ function Resume({props}) {
                     <Typography fontWeight={'bold'}>Skills:</Typography>
                     <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
                         <Typography>Languages: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {props.languages || 'C, C++, Java, Python, Swift, Javascript'}
+                            {skills?.languages || 'C, C++, Java, Python, Swift, Javascript'}
                         </Typography>
                     </div>
                     <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
                         <Typography>Technologies & Frameworks: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {props.Technologies || 'React, Node, Express, MongoDB, Firebase, AWS'}
+                            {skills?.techFrameworks || 'React, Node, Express, MongoDB, Firebase, AWS'}
                         </Typography>
                     </div>
                     <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
                         <Typography>Designing Frameworks: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {props.Frameworks || 'Bootstrap, Material-UI, TailwindCSS'}
+                            {skills?.designFrameworks || 'Bootstrap, Material-UI, TailwindCSS'}
                         </Typography>
                     </div>
                     <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
                         <Typography>Concepts: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {props.Concepts || 'Data Structures, Algorithms, OOP, DBMS, OS'}
+                            {skills?.concepts || 'Data Structures, Algorithms, OOP, DBMS, OS'}
                         </Typography>
                     </div>
                 </div>
@@ -75,9 +75,9 @@ function Resume({props}) {
                 <div>
                     <Typography fontWeight={'bold'}>Professional Experience</Typography>
                     <div>
-                        <Typography fontWeight={'normal'}>{props.ExpTitle || 'Experience 1'}</Typography>
+                        <Typography fontWeight={'normal'}>{exp.exptitle || 'Experience 1'}</Typography>
                         <Typography color={'textSecondary'}>
-                            {props.ExpDescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
+                            {exp.expdescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
                         </Typography>
                     </div>
                 </div>
@@ -87,9 +87,9 @@ function Resume({props}) {
                 {/* Projects Section */}
                 <div>
                     <Typography fontWeight={'bold'}>Projects</Typography>
-                    <Typography>{props.ProjTitle || 'Project 1'}</Typography>
+                    <Typography>{props?.ProjTitle || 'Project 1'}</Typography>
                     <Typography paragraph color={'textSecondary'}>
-                        {props.ProjDescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
+                        {props?.ProjDescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
                     </Typography>
                 </div>
                 <br />
@@ -98,11 +98,11 @@ function Resume({props}) {
                 {/* Education Section */}
                 <div>
                     <Typography fontWeight={'bold'}>Education</Typography>
-                    <Typography>{props.EdTitle || 'Education 1'}</Typography>
+                    <Typography>{props?.EdTitle || 'Education 1'}</Typography>
                     <Typography>
-                        {props.EdDescription || 'Stanford University'} - {props.EdDuration || '2019-2023'}
-                        <Typography color={'textSecondary'}>{props.EdDegree || 'BTech in Computer Science'}</Typography>
-                        <Typography color={'textSecondary'}>{props.EdGrades || '9.9 CGPA'}</Typography>
+                        {props?.EdDescription || 'Stanford University'} - {props?.EdDuration || '2019-2023'}
+                        <Typography color={'textSecondary'}>{props?.EdDegree || 'BTech in Computer Science'}</Typography>
+                        <Typography color={'textSecondary'}>{props?.EdGrades || '9.9 CGPA'}</Typography>
                     </Typography>
 
                 </div>

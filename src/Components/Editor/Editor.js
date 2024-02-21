@@ -54,8 +54,19 @@ function Editor() {
     };
 
     const [personalData, setpersonalData] = React.useState({});
-    const getPersonal = (personalData) => {
+    const [skill, setSkill] = React.useState({});
+    const [experience, setExp] = React.useState({});
+
+    const getData = (personalData) => {
         setpersonalData(personalData)
+    }
+
+    const getSkill = (skills) => {
+        setSkill(skills);
+    }
+
+    const getExp = (exp) => {
+        setExp(exp);
     }
     return (
         <>
@@ -74,13 +85,13 @@ function Editor() {
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
-                            <Personal getPersonal={getPersonal}/>
+                            <Personal getData={getData}/>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <Skills />
+                            <Skills getSkill={getSkill}/>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
-                            <Experience />
+                            <Experience getExp={getExp}/>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={3}>
                             <Projects />
@@ -91,7 +102,7 @@ function Editor() {
                     </Box>
                 </Paper>
                 <Paper elevation={5} className='template'>
-                    <Resume props={personalData}/>
+                    <Resume personal={personalData} skills={skill} exp={experience}/>
                 </Paper>
             </Box>
         </>
@@ -99,3 +110,5 @@ function Editor() {
 }
 
 export default Editor
+
+
