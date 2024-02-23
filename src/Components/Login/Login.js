@@ -3,9 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -17,14 +14,21 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 
 function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  
+  const [loginData, setLoginData] = React.useState({
+    email: "",
+    password: ""
+  })
+
+  const handleInputs = ((e) => {
+    setLoginData({...loginData, [e.target.name]:e.target.value});
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+
   const defaultTheme = createTheme();
 
   return (
@@ -55,6 +59,7 @@ function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleInputs}
             />
             <TextField
               margin="normal"
@@ -65,12 +70,14 @@ function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleInputs}
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Sign In
             </Button>
