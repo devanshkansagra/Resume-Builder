@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Typography } from '@mui/material'
+import { useRef } from 'react'
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -25,7 +26,9 @@ function CustomTabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box
+                    sx={{ p: 3 }}
+                >
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -42,7 +45,7 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
-        // 'aria-controls': `simple-tabpanel-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
     };
 }
 function Editor() {
@@ -78,13 +81,16 @@ function Editor() {
     const getProject = (proj) => {
         setProj(proj);
     }
+
+    const pdfRef = useRef();
     return (
         <>
+            
             <Box
-                className={` ${styles.flex} ${styles.justifyEvenly} ${styles.alignStart} ${styles.mt2} ${styles.px5} ${styles.mb5}`}
+                className={` ${styles.flex} ${styles.justifyBetween} ${styles.alignStart} ${styles.mt2} ${styles.px5} ${styles.mb5}`}
             >
-                <Paper elevation={4} className={`${styles.m5} ${styles.w100}`}>
-                    <Box sx={{ width: '100%' }}>
+                <Paper elevation={4} sx={{mt:6}}>
+                    <Box style={{ 'width': '45rem' }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                 <Tab label="Personal Information" {...a11yProps(0)} />
@@ -107,18 +113,21 @@ function Editor() {
                             <Projects getProject={getProject} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={4}>
-                            <Education getEducation={getEducation}/>
+                            <Education getEducation={getEducation} />
                         </CustomTabPanel>
                     </Box>
                 </Paper>
-                <Paper elevation={5} className='template'>
-                    <Resume
-                        personal={personalData}
-                        skills={skill}
-                        exp={experience} 
-                        proj={project}
-                        edu={education}
-                    />
+                <Paper elevation={0} style={{ 'width': '45rem' }}>
+                    <div ref={pdfRef}>
+                        <Resume
+                            personal={personalData}
+                            skills={skill}
+                            exp={experience}
+                            proj={project}
+                            edu={education}
+
+                        />
+                    </div>
                 </Paper>
             </Box>
         </>

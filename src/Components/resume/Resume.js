@@ -1,113 +1,131 @@
 import React, { useRef } from 'react'
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-// import Button from '@mui/material/Button';
-// import ReactToPrint from 'react-to-print';
 import styles from './resume.module.css';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
-// import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import ReactToPrint from 'react-to-print';
+import Button from '@mui/material/Button';
+import DownloadIcon from '@mui/icons-material/Download';
 
-function Resume({personal, skills, proj, edu, exp, props}) {
+function Resume({ personal, skills, proj, edu, exp }) {
 
+    let arrSkills = Object.values(skills);
+    let arrProj = Object.values(proj);
+    let arrExp = Object.values(exp);
+    let arrEdu = Object.values(edu);
     const pdfRef = useRef();
     return (
         <>
+            <div className={`${styles.flex} ${styles.justifyCenter}`}>
+                <Box>
+                    <ReactToPrint
+                        trigger={() => {
+                            return (
+                                <Button variant='contained'>Download Resume <DownloadIcon></DownloadIcon></Button>
+                            )
+                        }}
+                        content={() => pdfRef.current}
+                    /></Box>
+            </div>
+            <Paper elevation={5}>
+                <div className={styles.paper} ref={pdfRef}>
+                    <div>
+                        <div className={styles.name}>
+                            <Typography variant='h4' color='textSecondary' align='center' mb={2} fontWeight={'bold'}>{personal.firstName || 'Your'} {personal.lastName || 'Name'}</Typography>
+                        </div>
+                        <div className={`${styles.flex} ${styles.justifyBetween} ${styles.wrap}`}>
+                            <div className={styles.flex}>
+                                <GitHubIcon fontSize='small'></GitHubIcon>
+                                <Typography><span>&nbsp;{personal.github || 'Your Github'}</span></Typography>
+                            </div>
+                            <div className={styles.flex}>
+                                <LinkedInIcon fontSize='small'></LinkedInIcon>
+                                <Typography><span>&nbsp;{personal.linkedin || 'Your LinkedIn'}</span></Typography>
+                            </div>
+                            <div className={styles.flex}>
+                                <PhoneIcon fontSize='small'></PhoneIcon>
+                                <Typography><span>&nbsp;{personal.phone || 'Your Phone'}</span></Typography>
+                            </div>
+                            <div className={styles.flex}>
+                                <MailIcon fontSize='small'></MailIcon>
+                                <Typography><span>&nbsp;{personal.email || 'Your Mail'}</span></Typography>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
 
-            {/* Useful Links */}
-            <div className={styles.paper} ref={pdfRef}>
-                <div>
-                    <div className={styles.name}>
-                        <Typography variant='h3' color='textSecondary' fontWeight={'bold'}>{personal.firstName || 'Your'} {personal.lastName || 'Name'}</Typography>
+                    {/* Skills Section */}
+                    <div>
+                        <Typography fontWeight={'bold'}>Skills</Typography>
+                        {arrSkills.map((skill, index) => (
+                            <div key={index}>
+                                <span>{skill?.skilltitle}</span>:&nbsp;
+                                <span className={styles.textSecondary}>
+                                    {skill?.skillcontent}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                     <br />
-                    <div className={`${styles.flex} ${styles.justifyBetween}`}>
-                        <div className={styles.flex}>
-                            <GitHubIcon fontSize='small'></GitHubIcon>
-                            <Typography><a href='/'>&nbsp;{personal.github || 'Your Github'}</a></Typography>
-                        </div>
-                        <div className={styles.flex}>
-                            <LinkedInIcon fontSize='small'></LinkedInIcon>
-                            <Typography><a href='/'>&nbsp;{personal.linkedin || 'Your LinkedIn'}</a></Typography>
-                        </div>
-                        <div className={styles.flex}>
-                            <PhoneIcon fontSize='small'></PhoneIcon>
-                            <Typography><div>&nbsp;{personal.phone || 'Your Phone'}</div></Typography>
-                        </div>
-                        <div className={styles.flex}>
-                            <MailIcon fontSize='small'></MailIcon>
-                            <Typography><a href='/'>&nbsp;{personal.email || 'Your Mail'}</a></Typography>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <hr />
+                    <hr />
 
-                {/* Skills Section */}
-                <div>
-                    <Typography fontWeight={'bold'}>Skills:</Typography>
-                    <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
-                        <Typography>Languages: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {skills?.languages || 'C, C++, Java, Python, Swift, Javascript'}
-                        </Typography>
-                    </div>
-                    <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
-                        <Typography>Technologies & Frameworks: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {skills?.techFrameworks || 'React, Node, Express, MongoDB, Firebase, AWS'}
-                        </Typography>
-                    </div>
-                    <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
-                        <Typography>Designing Frameworks: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {skills?.designFrameworks || 'Bootstrap, Material-UI, TailwindCSS'}
-                        </Typography>
-                    </div>
-                    <div className={`${styles.flex} ${styles.alignItemsCenter}`}>
-                        <Typography>Concepts: </Typography>&nbsp;<Typography color={'textSecondary'}>
-                            {skills?.concepts || 'Data Structures, Algorithms, OOP, DBMS, OS'}
-                        </Typography>
-                    </div>
-                </div>
-                <br />
-                <hr />
-
-                {/* Professional Experience Section */}
-                <div>
-                    <Typography fontWeight={'bold'}>Professional Experience</Typography>
+                    {/* Professional Experience Section */}
                     <div>
-                        <Typography fontWeight={'normal'}>{exp.exptitle || 'Experience 1'}</Typography>
-                        <Typography color={'textSecondary'}>
-                            {exp.expdescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
-                        </Typography>
+                        <Typography fontWeight={'bold'}>Professional Experience</Typography>
+                        {arrExp.map((experience, index) => {
+                            return (
+                                <div key={index}>
+                                    <div className={`${styles.flex} ${styles.justifyBetween}`}><Typography>{experience?.exptitle}</Typography>
+                                        <Typography color={'textSecondary'}>{experience?.tenure}</Typography></div>
+                                    <Typography color={'textSecondary'}>
+                                        {experience?.expdescription}
+                                    </Typography>
+                                    <br />
+                                </div>
+                            )
+                        })}
                     </div>
-                </div>
-                <br />
-                <hr />
+                    <br />
+                    <hr />
 
-                {/* Projects Section */}
-                <div>
-                    <Typography fontWeight={'bold'}>Projects</Typography>
-                    <Typography>{proj?.projtitle || 'Project 1'}</Typography>
-                    <Typography paragraph color={'textSecondary'}>
-                        {proj?.projdescription || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa.'}
-                    </Typography>
-                </div>
-                <br />
-                <hr />
+                    {/* Projects Section */}
+                    <div>
+                        <Typography fontWeight={'bold'}>Projects</Typography>
+                        {arrProj.map((project, index) => (
+                            <div key={index}>
+                                <Typography>{project?.projtitle}</Typography>
+                                <Typography paragraph color={'textSecondary'}>
+                                    {project?.projdescription}
+                                </Typography>
+                            </div>
+                        ))}
+                    </div>
+                    <br />
+                    <hr />
 
-                {/* Education Section */}
-                <div>
-                    <Typography fontWeight={'bold'}>Education</Typography>
-                    <Typography>{edu?.edtitle || 'Education 1'}</Typography>
-                    <Typography>
-                        {edu.insName || 'Stanford University'} - {edu?.tenure || '2019-2023'}
-                        <Typography color={'textSecondary'}>{edu?.qualification || 'BTech in Computer Science'}</Typography>
-                        <Typography color={'textSecondary'}>{edu?.scores || '9.9 CGPA'}</Typography>
-                    </Typography>
-
+                    {/* Education Section */}
+                    <div>
+                        <Typography fontWeight={'bold'}>Education</Typography>
+                        {arrEdu.map((education, index) => {
+                            return (
+                                <div key={index}>
+                                    <Typography>
+                                        {education.insName} - {education?.tenure}
+                                        <Typography color={'textSecondary'}>{education?.qualification}</Typography>
+                                        <Typography color={'textSecondary'}>{education?.scores}</Typography>
+                                    </Typography>
+                                    <br />
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <br />
                 </div>
-            </div>
-            
+            </Paper>
+
         </>
     )
 }

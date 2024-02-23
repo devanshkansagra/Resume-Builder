@@ -64,3 +64,11 @@
 .wAuto {
     width: auto;
 }
+
+.flexEnd {
+    justify-content: flex-end;
+}
+
+.m3 {
+    margin: 3rem;
+}

@@ -11,16 +11,24 @@ import styles from './css/editor.module.css'
 const defaultTheme = createTheme();
 function Projects(proj) {
 
-    const [projects, setProjects] = React.useState({
+    const [projects, setProjects] = React.useState([{
         projtitle: "",
         projdescription: "",
-    });
+    }]);
 
-    const handleInputs = (e) => {
-        setProjects({...projects, [e.target.name]: e.target.value});
+    const addProject = () => {
+        setProjects([...projects, { projtitle: "", projdescription: "" }]);
+    }
+
+    const handleInputs = (index, e) => {
+        const newProjects = [...projects];
+        // "In the newProjects array, find the project object at the specified index, and update the property with the name e.target.name to the new value e.target.value"
+        newProjects[index][e.target.name] = e.target.value;
+        setProjects(newProjects);
     }
 
     const handleSubmit = (e) => {
+        // console.log(projects);
         e.preventDefault();
         proj.getProject(projects);
     }
@@ -42,41 +50,43 @@ function Projects(proj) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained'>Add Project</Button>
+                <Button variant='contained' onClick={addProject}>Add Project</Button>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
+                    {projects.map((project, index) => {
+                        return (
+                            <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
 
-                        {/* Languages */}
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="projtitle"
-                                required
-                                fullWidth
-                                id="title"
-                                label="Project Title"
-                                onChange={handleInputs}
-                                // autofocus
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="projdescription"
-                                required
-                                fullWidth
-                                id="description"
-                                label="Project Description"
-                                // autofocus
-                                multiline
-                                onChange={handleInputs}
-                                rows={6}
-                            />
-                        </Grid>
-
-
-
-                    </Grid>
+                                {/* Languages */}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="projtitle"
+                                        required
+                                        fullWidth
+                                        id="title"
+                                        label="Project Title"
+                                        onChange={(e) => handleInputs(index, e)}
+                                    // autofocus
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="projdescription"
+                                        required
+                                        fullWidth
+                                        id="description"
+                                        label="Project Description"
+                                        // autofocus
+                                        multiline
+                                        onChange={(e) => handleInputs(index, e)}
+                                        rows={6}
+                                    />
+                                </Grid>
+                                <br />
+                            </Grid>
+                        )
+                    })}
                     <Box className={`${styles.flex} ${styles.justifyBetween}`}>
                         <Button
                             type="submit"

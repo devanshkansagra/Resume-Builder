@@ -12,16 +12,21 @@ import styles from './css/editor.module.css'
 const defaultTheme = createTheme();
 function Education(edu) {
 
-    const [education, setEducation] = React.useState({
-        edtitle: "",
+    const [education, setEducation] = React.useState([{
         insName: "",
         tenure: "",
         qualification: "",
         scores: ""
-    })
+    }])
 
-    const handleInputs = (e) => {
-        setEducation({...education, [e.target.name]: e.target.value});
+    const addEducation = () => {
+        setEducation([...education, { insName: "", tenure: "", qualification: "", scores: "" }])
+    }
+
+    const handleInputs = (index, e) => {
+        const newEdu = [...education];
+        newEdu[index][e.target.name] = e.target.value;
+        setEducation(newEdu);
     }
 
     const handleSubmit = (e) => {
@@ -47,70 +52,58 @@ function Education(edu) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained'>Add Education Qualification</Button>
-                <Box component="form" noValidate sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
-
-                        {/* Languages */}
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="edtitle"
-                                required
-                                fullWidth
-                                id="edtitle"
-                                label="Education Title"
-                                onChange={handleInputs}
-                            // autofocus
-                            />
+                <Button variant='contained' onClick={addEducation}>Add Education Qualification</Button>
+                <Box component="form" noValidate sx={{ mb: 3 }}>
+                    {education.map((edu, index) => (
+                        <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="insName"
+                                    required
+                                    fullWidth
+                                    id="insName"
+                                    label="Institution Name"
+                                    onChange={(e) => handleInputs(index, e)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="tenure"
+                                    required
+                                    fullWidth
+                                    id="tenure"
+                                    label="Education Tenure"
+                                    onChange={(e) => handleInputs(index, e)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="qualification"
+                                    required
+                                    fullWidth
+                                    id="Qualification"
+                                    label="Education Qualification"
+                                    onChange={(e) => handleInputs(index, e)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="scores"
+                                    // required
+                                    fullWidth
+                                    id="scores"
+                                    label="Final Scores"
+                                    onChange={(e) => handleInputs(index, e)}
+                                />
+                            </Grid>
+                            <br />
+                            <br />
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="insName"
-                                required
-                                fullWidth
-                                id="insName"
-                                label="Institution Name"
-                                onChange={handleInputs}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="tenure"
-                                required
-                                fullWidth
-                                id="tenure"
-                                label="Education Tenure"
-                                onChange={handleInputs}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="qualification"
-                                required
-                                fullWidth
-                                id="Qualification"
-                                label="Education Qualification"
-                                onChange={handleInputs}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="scores"
-                                // required
-                                fullWidth
-                                id="scores"
-                                label="Final Scores"
-                            />
-                        </Grid>
-
-
-
-                    </Grid>
+                    ))}
                 </Box>
                 <Box className={`${styles.flex} ${styles.justifyBetween}`}>
                     <Button
@@ -122,7 +115,6 @@ function Education(edu) {
                         Save
                     </Button>
                 </Box>
-                {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
         </ThemeProvider>
     );

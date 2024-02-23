@@ -28,3 +28,19 @@ Link {
     color: white;
     text-decoration: none;
 }
+
+.flexEnd {
+    justify-content: flex-end;
+}
+
+.m3 {
+    margin: 3rem;
+}
+
+.justifyCenter {
+    justify-content: center;
+}
+
+.textSecondary {
+    color: #6c757d;
+}

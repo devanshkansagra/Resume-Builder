@@ -9,23 +9,28 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
+function Skills(skill) {
 
-export default function Skills(props) {
+    const [skills, setSkills] = React.useState([{
+        skilltitle: "",
+        skillcontent: "",
+    }]);
 
-    const [skillsData, setSkillsData] = React.useState({
-        languages: "",
-        techFrameworks: "",
-        designFrameworks: "",
-        concepts: "",
-    })
-    const handleInputs = (e) => {
-        setSkillsData({...skillsData, [e.target.name]:e.target.value});
+    const addProject = () => {
+        setSkills([...skills, { skilltitle: "", skillcontent: "" }]);
+    }
+
+    const handleInputs = (index, e) => {
+        const newSkills = [...skills];
+        // "In the newSkills array, find the project object at the specified index, and update the property with the name e.target.name to the new value e.target.value"
+        newSkills[index][e.target.name] = e.target.value;
+        setSkills(newSkills);
     }
 
     const handleSubmit = (e) => {
+        // console.log(Skills);
         e.preventDefault();
-        // console.log(skillsData);
-        props.getSkill(skillsData);
+        skill.getSkill(skills);
     }
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -43,78 +48,50 @@ export default function Skills(props) {
                     <Typography component="h1" variant="h5">
                         Skills
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 3 }}>
-                        <Grid container spacing={2}>
 
-                            {/* Languages */}
-                            <Grid item xs={12}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="languages"
-                                    required
-                                    fullWidth
-                                    id="languages"
-                                    label="Languages"
-                                    onChange={handleInputs}
+                </Box>
+                <Button variant='contained' onClick={addProject}>Add Skill</Button>
+                <Box component="form" noValidate sx={{ mt: 3 }}>
+                    {skills.map((project, index) => {
+                        return (
+                            <Grid container spacing={2} key={index} sx={{ mb: 3 }}>
+                                {/* Languages */}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="skilltitle"
+                                        required
+                                        fullWidth
+                                        id="skilltitle"
+                                        label="Skills Title"
+                                        onChange={(e) => handleInputs(index, e)}
                                     // autofocus
-                                />
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="skillcontent"
+                                        required
+                                        fullWidth
+                                        id="skillcontent"
+                                        label="Skill Content"
+                                        // autofocus
+                                        onChange={(e) => handleInputs(index, e)}
+                                    />
+                                </Grid>
                             </Grid>
-
-                            {/* Technologies and Frameworks */}
-                            <Grid item xs={12}>
-                                {/* <Typography variant="h6">Languages</Typography> */}
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="techFrameworks"
-                                    required
-                                    fullWidth
-                                    id="techFrameworks"
-                                    label="Technologies and Frameworks"
-                                    onChange={handleInputs}
-                                    // autofocus
-                                />
-                            </Grid>
-
-                            {/* Designing Fraemworks */}
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="designFrameworks"
-                                    label="Designing Frameworks"
-                                    name="designFrameworks"
-                                    autoComplete="family-name"
-                                    onChange={handleInputs}
-                                />
-                            </Grid>
-
-                            {/* Concepts */}
-                            <Grid item xs={12}>
-                                {/* <Typography variant="h6">Languages</Typography> */}
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="concepts"
-                                    required
-                                    fullWidth
-                                    id="concepts"
-                                    label="Programming Concepts"
-                                    onChange={handleInputs}
-                                    // autofocus
-                                />
-                            </Grid>
-                            
-                            
-                        </Grid>
-                        <Box className={`${styles.flex} ${styles.justifyBetween}`}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                                onClick={handleSubmit}
-                            >
-                                Save
-                            </Button>
-                        </Box>
+                        )
+                    })}
+                    <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            onClick={handleSubmit}
+                        >
+                            Save
+                        </Button>
                     </Box>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
@@ -122,3 +99,5 @@ export default function Skills(props) {
         </ThemeProvider>
     );
 }
+
+export default Skills
