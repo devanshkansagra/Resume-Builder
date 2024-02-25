@@ -14,18 +14,46 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.css';
 
 function Login() {
-  
+
   const [loginData, setLoginData] = React.useState({
     email: "",
     password: ""
   })
 
   const handleInputs = ((e) => {
-    setLoginData({...loginData, [e.target.name]:e.target.value});
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   })
 
-  const handleSubmit = (e) => {
+  const login = loginData;
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, password } = login;
+    try {
+      const data = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email, password
+        })
+      })
+
+      const response = await data.json();
+      if(data.status === 422) {
+        window.alert("User not found");
+      }
+      if(data.status === 201) {
+        window.alert("Login Successfull");
+      }
+
+      if(!response) {
+        window.alert("Unable to fetch the data");
+      }
+    } catch (error) {
+      window.alert("User not found");
+    }
   }
 
 
