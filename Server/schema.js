@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcyrpt = require('bcryptjs');
 
 const schema = new mongoose.Schema({
     firstName: {
@@ -23,5 +24,11 @@ const schema = new mongoose.Schema({
     },
 })
 
+schema.pre('save', async function (next) {
+    if(this.isModified('password')) {
+        this.password = await bcyrpt.hash(this.password, 12);
+    }
+    next();
+})
 const userSchema = mongoose.model('users', schema);
 module.exports = userSchema;
