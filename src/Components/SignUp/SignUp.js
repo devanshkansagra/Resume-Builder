@@ -23,18 +23,50 @@ export default function SignUp() {
     lastName: "",
     email: "",
     username: "",
-    password: "", 
+    password: "",
   })
 
   const handleInputs = (e) => {
-    setSignUpData({...signUpData, [e.target.name]:e.target.value});
+    setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
 
-  const handleSubmit = (e) => {
+  let userdata = signUpData;
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { firstName, lastName, email, username, password } = userdata;
+
+    try {
+
+      const data = await fetch("http://localhost:4000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          firstName, lastName, email, username, password
+        })
+      })
+
+      const response = await data.json();
+
+      if (data.status === 422) {
+        window.alert("Details are not entered properly");
+      }
+      if (data.status === 403) {
+        window.alert("Email already in use");
+      }
+      if (!response) {
+        window.alert("Unable to register user");
+      }
+      else {
+        window.alert("Registered successfully");
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
   }
-
-
 
   return (
     <ThemeProvider theme={defaultTheme}>

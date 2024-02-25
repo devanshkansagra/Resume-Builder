@@ -3,11 +3,13 @@ const env = require('dotenv');
 const mongoose = require('mongoose');
 const app = express();
 const users = require('./schema');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 // Dotenv config
 env.config({ path: '../.env' });
 
 // Server Port
-const port = process.env.PORT;
+const port = 4000;
 
 // Database
 const DB = process.env.DATABASE;
@@ -17,14 +19,16 @@ mongoose.connect(DB).then(() => {
     console.log("Unable to connect to the database");
 })
 
+// For Cors
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
-
-// routes
-app.get('/', (req, res) => {
-    res.send("This is a root");
-    console.log("This is a root");
-})
-
 app.post('/signup', async (req, res) => {
 
     console.log('Signup');
