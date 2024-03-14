@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const users = require('./schema');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const cookies = require('cookie-parser');
 // Dotenv config
 env.config({ path: '../.env' });
 
@@ -21,14 +21,31 @@ mongoose.connect(DB).then(() => {
 
 // For Cors
 app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
+    cors({
+        origin: "http://localhost:3000",
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+    })
 );
-
 app.use(express.json());
+app.use(cookies());
+
+
+// const generateAuthAndRefreshToken = async (userId) => {
+//     try {
+//         const user = await users.findById(userId);
+//         const authToken = user.generateAuthToken();
+//         const refreshToken = user.generateRefreshToken();
+
+//         user.refreshToken = refreshToken;
+//         await user.save({ validateBeforeSave: false })
+
+//         return { authToken, refreshToken }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
 app.post('/signup', async (req, res) => {
 
     console.log('Signup');
@@ -67,12 +84,15 @@ app.post('/login', async (req, res) => {
         }
         else {
             const user = await users.findOne({ email: email });
-            if (user) {
-                res.status(201).send({message: "Logged in successfully"})
+            const isPasswordCorrect = await user.checkPassword(password);
+            if (user && isPasswordCorrect) {
+                res.status(201).send({ message: "Logged in successfully" });
+
             }
             else {
-                res.status(422).send({ message: "Invalid credentials" });
+                res.status(401).send({ message: "Invalid Credentials" });
             }
+
         }
         console.log("Login");
 
@@ -80,6 +100,12 @@ app.post('/login', async (req, res) => {
         console.log(error);
     }
 })
+
+app.get('/admin', async (req, res) => {
+
+    const usersData = await users.find({});
+    res.send(usersData);
+})  
 
 app.listen(port, (req, res) => {
     console.log(`Server is live on port ${port}`);

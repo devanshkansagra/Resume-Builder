@@ -41,11 +41,12 @@ function Login() {
       })
 
       const response = await data.json();
-      if(data.status === 422) {
-        window.alert("User not found");
-      }
       if(data.status === 201) {
         window.alert("Login Successfull");
+      }
+
+      if(data.status === 401) {
+        window.alert("Invalid Credentials");
       }
 
       if(!response) {

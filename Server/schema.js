@@ -23,9 +23,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    refreshToken: {
-        type: String
-    }
 })
 
 // Function syntax is used due to the usage of this keyword
@@ -40,29 +37,5 @@ schema.methods.checkPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-schema.methods.genenerateAuthToken = async function () {
-    return await jwt.sign(
-        {
-            _id: this._id,
-            email: this.email,
-        },
-        process.env.SECRET_KEY,
-        {
-            expiresIn: process.env.SECRET_KEY_EXPIRY
-        }
-    )
-}
-
-schema.methods.genenerateRefreshToken = async function () {
-    return await jwt.sign(
-        {
-            _id: this._id,
-        },
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-        }
-    )
-}
 const userSchema = mongoose.model('users', schema);
 module.exports = userSchema;

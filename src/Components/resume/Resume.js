@@ -22,6 +22,7 @@ function Resume({ personal, skills, proj, edu, exp }) {
             <div className={`${styles.flex} ${styles.justifyCenter}`}>
                 <Box>
                     <ReactToPrint
+                        documentTitle={personal.firstName +" "+personal.lastName+`'s Resume`}
                         trigger={() => {
                             return (
                                 <Button variant='contained'>Download Resume <DownloadIcon></DownloadIcon></Button>
