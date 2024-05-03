@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import GoogleIcon from '@mui/icons-material/Google';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 
 function Login() {
@@ -25,6 +25,7 @@ function Login() {
   })
 
   const login = loginData;
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,7 +43,8 @@ function Login() {
 
       const response = await data.json();
       if(data.status === 201) {
-        window.alert("Login Successfull");
+        // window.alert("Login Successfull");
+        navigate('/editor');
       }
 
       if(data.status === 401) {
