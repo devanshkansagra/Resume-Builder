@@ -18,8 +18,8 @@ import styles from './navbar.module.css';
 
 const pages = ['Home', 'About'];
 const links = ['', 'about'];
-const settings = ['Profile', 'Logout', 'Login', 'SignUp'];
-const profileLinks = ['profile', 'logout', 'login', 'signup'];
+const settings = ['Profile', 'Login', 'SignUp'];
+const profileLinks = ['profile', 'login', 'signup'];
 
 const darkTheme = createTheme({
     palette: {

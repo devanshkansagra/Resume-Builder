@@ -6,6 +6,7 @@ import styles from './profile.module.css'
 import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button'
 function Profile() {
 
     const [details, setDetails] = React.useState({});
@@ -28,6 +29,16 @@ function Profile() {
         }
         getDetails();
     }, [navigate]);
+
+    const handleLogout = async () => {
+        const response = await axios.delete('/logout');
+        if(response.status === 200) {
+            navigate('/login');
+        }
+        else {
+            window.alert('Unable to logout user');
+        }
+    }
     return (
         <>
             <Container>
@@ -54,8 +65,8 @@ function Profile() {
                                 <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.password}</Typography></td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td><Link className={`${styles.btnPrimary} ${styles.mb3}`}>Edit Profile</Link></td>
+                                <td><Link className={`${styles.btnPrimary}`}>Edit Profile</Link></td>
+                                <td><Button variant="outlined" color='error' onClick={handleLogout}>Logout</Button></td>
                             </tr>
 
                         </table>
