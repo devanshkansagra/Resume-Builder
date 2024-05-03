@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './signup.module.css';
 import GoogleIcon from '@mui/icons-material/Google';
 
@@ -30,6 +30,7 @@ export default function SignUp() {
   }
 
   let userdata = signUpData;
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,7 +38,7 @@ export default function SignUp() {
 
     try {
 
-      const data = await fetch("http://localhost:4000/signup", {
+      const data = await fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -52,14 +53,16 @@ export default function SignUp() {
       if (data.status === 422) {
         window.alert("Details are not entered properly");
       }
-      if (data.status === 403) {
+      else if (data.status === 409) {
         window.alert("Email already in use");
+        navigate('/signup');
       }
-      if (!response) {
+      else if (!response) {
         window.alert("Unable to register user");
       }
       else {
         window.alert("Registered successfully");
+        navigate('/profile')
       }
 
     } catch (error) {

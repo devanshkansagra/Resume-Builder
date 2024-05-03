@@ -7,6 +7,7 @@ import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
 import Editor from './Components/Editor/Editor';
 import Admin from './Components/Admin/Admin';
+import Profile from './Components/Profile/Profile'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/editor' element={<Editor />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   );

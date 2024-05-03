@@ -15,6 +15,7 @@ import styles from './login.module.css';
 
 function Login() {
 
+  const navigate = useNavigate();
   const [loginData, setLoginData] = React.useState({
     email: "",
     password: ""
@@ -25,13 +26,12 @@ function Login() {
   })
 
   const login = loginData;
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { email, password } = login;
     try {
-      const data = await fetch("http://localhost:4000/login", {
+      const data = await fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -42,16 +42,15 @@ function Login() {
       })
 
       const response = await data.json();
-      if(data.status === 201) {
-        // window.alert("Login Successfull");
+      if(data.status === 200) {
         navigate('/editor');
       }
 
-      if(data.status === 401) {
+      else if(data.status === 401) {
         window.alert("Invalid Credentials");
       }
 
-      if(!response) {
+      else if(!response) {
         window.alert("Unable to fetch the data");
       }
     } catch (error) {
