@@ -22,7 +22,6 @@ export default function SignUp() {
     firstName: "",
     lastName: "",
     email: "",
-    username: "",
     password: "",
   })
 
@@ -34,7 +33,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, username, password } = userdata;
+    const { firstName, lastName, email, password } = userdata;
 
     try {
 
@@ -44,7 +43,7 @@ export default function SignUp() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          firstName, lastName, email, username, password
+          firstName, lastName, email, password
         })
       })
 
@@ -120,18 +119,6 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={handleInputs}
-
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoComplete="username"
                   onChange={handleInputs}
 
                 />
