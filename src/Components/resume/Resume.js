@@ -40,11 +40,11 @@ function Resume({ personal, skills, proj, edu, exp }) {
                         <div className={`${styles.flex} ${styles.justifyBetween} ${styles.wrap}`}>
                             <div className={styles.flex}>
                                 <GitHubIcon fontSize='small'></GitHubIcon>
-                                <Typography><span>&nbsp;{personal.github || 'Your Github'}</span></Typography>
+                                <Typography><a href={`https://github.com/${personal.github}`}>&nbsp;{personal.github || 'Your Github'}</a></Typography>
                             </div>
                             <div className={styles.flex}>
                                 <LinkedInIcon fontSize='small'></LinkedInIcon>
-                                <Typography><span>&nbsp;{personal.linkedin || 'Your LinkedIn'}</span></Typography>
+                                <Typography><a href={`https://linkedin.com/in/${personal.linkedin}`}>&nbsp;{personal.linkedin || 'Your LinkedIn'}</a></Typography>
                             </div>
                             <div className={styles.flex}>
                                 <PhoneIcon fontSize='small'></PhoneIcon>

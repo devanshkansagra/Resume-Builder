@@ -50,11 +50,8 @@ function Login() {
         window.alert("Invalid Credentials");
       }
 
-      else if(!response) {
-        window.alert("Unable to fetch the data");
-      }
     } catch (error) {
-      window.alert("User not found");
+      window.alert("Unable to login due to server error");
     }
   }
 
@@ -121,8 +118,8 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link to="/signup" className={styles.link}>
-                  {"Don't have an account? Sign Up"}
+                <Link to="/forgot" className={styles.link}>
+                  {"Forgot Your Password?"}
                 </Link>
               </Grid>
             </Grid>
