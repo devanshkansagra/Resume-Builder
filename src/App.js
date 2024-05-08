@@ -9,6 +9,7 @@ import Editor from './Components/Editor/Editor';
 import Admin from './Components/Admin/Admin';
 import Profile from './Components/Profile/Profile'
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
+import ResetPassword from './Components/Reset/ResetPassword';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/admin' element={<Admin />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/forgot' element={<ForgotPassword />} />
+        <Route path='/resetPassword' element={<ResetPassword />} />
       </Routes>
     </>
   );
