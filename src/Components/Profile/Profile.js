@@ -61,7 +61,7 @@ function Profile() {
                                 <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.password}</Typography></td>
                             </tr>
                             <tr>
-                                <td><Link className={`${styles.btnPrimary}`}>Edit Profile</Link></td>
+                                <td><Link className={`${styles.btnPrimary}`} to="/edit">Edit Profile</Link></td>
                                 <td><Button variant="outlined" color='error' onClick={handleLogout}>Logout</Button></td>
                             </tr>
 
