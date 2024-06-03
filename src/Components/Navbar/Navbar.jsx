@@ -18,8 +18,6 @@ import styles from './navbar.module.css';
 
 const pages = ['Home', 'About'];
 const links = ['', 'about'];
-const settings = ['Profile', 'Login', 'SignUp'];
-const profileLinks = ['profile', 'login', 'signup'];
 
 const darkTheme = createTheme({
     palette: {
@@ -101,7 +99,7 @@ function Navbar() {
                             >
                                 {pages.map((page, index) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                       <Link className={styles.links}to={`/${links[index]}`}>{page}</Link>
+                                        <Link className={styles.links} to={`/${links[index]}`}>{page}</Link>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -132,7 +130,7 @@ function Navbar() {
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                <Link className={styles.links}to={`/${links[index]}`}>{page}</Link>
+                                    <Link className={styles.links} to={`/${links[index]}`}>{page}</Link>
                                 </Button>
                             ))}
                         </Box>
@@ -159,11 +157,12 @@ function Navbar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting, index) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Link className={styles.links}to={`/${profileLinks[index]}`}>{setting}</Link>
-                                    </MenuItem>
-                                ))}
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link className={styles.links} to='/login'>Login</Link>
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Link className={styles.links} to='/signup'>Signup</Link>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>
