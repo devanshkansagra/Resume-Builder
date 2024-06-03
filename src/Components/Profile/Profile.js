@@ -14,7 +14,7 @@ function Profile() {
     useEffect(() => {
         const getDetails = async () => {
             try {
-                const response = await axios.get('/profile');
+                const response = await axios.get('/users/profile');
 
                 if (response.status === 200) {
                     setDetails(response.data.details);
@@ -31,7 +31,7 @@ function Profile() {
     }, [navigate]);
 
     const handleLogout = async () => {
-        const response = await axios.delete('/logout');
+        const response = await axios.delete('/users/logout');
         if(response.status === 200) {
             navigate('/login');
         }

@@ -24,7 +24,7 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/forgot', {
+            const response = await fetch('/users/forgot', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json",

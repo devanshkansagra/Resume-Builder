@@ -31,7 +31,7 @@ function Login() {
 
     const { email, password } = login;
     try {
-      const data = await fetch("/login", {
+      const data = await fetch("/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -39,9 +39,7 @@ function Login() {
         body: JSON.stringify({
           email, password
         })
-      })
-
-      const response = await data.json();
+      });
       if(data.status === 200) {
         navigate('/editor');
       }
@@ -50,8 +48,12 @@ function Login() {
         window.alert("Invalid Credentials");
       }
 
+      else if(data.status === 500) {
+        window.alert('Server error');
+      }
+
     } catch (error) {
-      window.alert("Unable to login due to server error");
+      console.log(error);
     }
   }
 

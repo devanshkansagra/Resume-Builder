@@ -38,7 +38,7 @@ export default function SignUp() {
 
     try {
 
-      const data = await fetch("/signup", {
+      const data = await fetch("/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

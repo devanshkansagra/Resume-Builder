@@ -33,7 +33,7 @@ function ResetPassword() {
         }
         else {
             try {
-                const response = await axios.post('/resetPassword', {
+                const response = await axios.post('/users/resetPassword', {
                     data: details
                 })
 
