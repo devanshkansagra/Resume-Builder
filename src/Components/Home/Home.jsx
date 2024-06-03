@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './home.module.css'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
@@ -6,16 +6,31 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom'
+import AuthContext from '../../context/AuthContext'
 
 const darkTheme = createTheme({
   palette: {
-      primary: {
-        main: "#424242",
-      }
+    primary: {
+      main: "#424242",
+    }
   },
 });
 
 function Home() {
+
+  const { auth } = useContext(AuthContext);
+  const VerifyUser = () => {
+    if(auth) {
+      return (
+        <Link to='/editor' className={`${styles.link}`}>Create Resume</Link>
+      )
+    }
+    else {
+      return (
+        <Link to='/login' className={`${styles.link}`}>Create Resume</Link>
+      )
+    }
+  }
   return (
     <Container>
       <Typography
@@ -43,7 +58,7 @@ function Home() {
       <Box className={`${styles.flex} ${styles.justifyCenter} ${styles.mt3}`}>
         <ThemeProvider theme={darkTheme}>
           <Button variant='contained'>
-            <Link to='/editor' className={`${styles.link}`}>Create Resume</Link>
+            <VerifyUser />
           </Button>
         </ThemeProvider>
       </Box>
