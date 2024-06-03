@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import axios from 'axios';
@@ -7,10 +7,13 @@ import PersonIcon from '@mui/icons-material/Person';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button'
+import AuthContext from '../../context/AuthContext';
 function Profile() {
 
     const [details, setDetails] = React.useState({});
     const navigate = useNavigate();
+
+    const {setAuth} = useContext(AuthContext);
     useEffect(() => {
         const getDetails = async () => {
             try {
@@ -34,6 +37,7 @@ function Profile() {
         const response = await axios.delete('/users/logout');
         if(response.status === 200) {
             navigate('/login');
+            setAuth(false);
         }
         else {
             window.alert('Unable to logout user');

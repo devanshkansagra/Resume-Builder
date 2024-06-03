@@ -15,6 +15,8 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import styles from './navbar.module.css';
+import AuthContext from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const pages = ['Home', 'About'];
 const links = ['', 'about'];
@@ -28,6 +30,8 @@ const darkTheme = createTheme({
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    
+    const { auth } = useContext(AuthContext);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -43,6 +47,28 @@ function Navbar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const RenderMenu = () => {
+        if (!auth) {
+            return (
+                <>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                        <Link className={styles.links} to='/login'>Login</Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                        <Link className={styles.links} to='/signup'>Signup</Link>
+                    </MenuItem>
+                </>
+            )
+        }
+        else {
+            return (
+                <MenuItem onClick={handleCloseUserMenu}>
+                    <Link className={styles.links} to='/profile'>Profile</Link>
+                </MenuItem>
+            )
+        }
+    }
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -157,12 +183,7 @@ function Navbar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                <MenuItem onClick={handleCloseUserMenu}>
-                                    <Link className={styles.links} to='/login'>Login</Link>
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseUserMenu}>
-                                    <Link className={styles.links} to='/signup'>Signup</Link>
-                                </MenuItem>
+                                <RenderMenu />
                             </Menu>
                         </Box>
                     </Toolbar>

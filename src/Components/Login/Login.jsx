@@ -13,6 +13,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 
+import AuthContext from '../../context/AuthContext';
+import { useContext } from 'react';
+
 function Login() {
 
   const navigate = useNavigate();
@@ -26,6 +29,9 @@ function Login() {
   })
 
   const login = loginData;
+
+  const {setAuth} = useContext(AuthContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,6 +47,7 @@ function Login() {
         })
       });
       if(data.status === 200) {
+        setAuth(true);
         navigate('/editor');
       }
 
