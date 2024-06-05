@@ -8,12 +8,14 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button'
 import AuthContext from '../../context/AuthContext';
+import UserContext from '../../context/UserContext';
 function Profile() {
 
     const [details, setDetails] = React.useState({});
     const navigate = useNavigate();
 
-    const {setAuth} = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
+    const { setUserInfo } = useContext(UserContext);
     useEffect(() => {
         const getDetails = async () => {
             try {
@@ -21,6 +23,7 @@ function Profile() {
 
                 if (response.status === 200) {
                     setDetails(response.data.details);
+                    setUserInfo(response.data.details);
                 }
                 else if (response.status === 401) {
                     navigate('/login');
@@ -31,11 +34,11 @@ function Profile() {
             }
         }
         getDetails();
-    }, [navigate]);
+    }, [navigate, setUserInfo]);
 
     const handleLogout = async () => {
         const response = await axios.delete('/users/logout');
-        if(response.status === 200) {
+        if (response.status === 200) {
             navigate('/login');
             setAuth(false);
         }

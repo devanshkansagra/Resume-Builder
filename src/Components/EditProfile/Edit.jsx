@@ -5,35 +5,40 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../../context/UserContext';
 
 function Edit() {
 
+    const { userInfo} = useContext(UserContext); 
+
     const [details, setDetails] = React.useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
+        firstName: userInfo.firstName || "",
+        lastName: userInfo.lastName || "",
+        email: userInfo.email || "",
+        oldpassword: "",
+        newpassword: "",
     });
 
     const navigate = useNavigate();
     const handleInputs = (e) => {
-        setDetails({...details, [e.target.name]:e.target.value});
+        setDetails({ ...details, [e.target.name]: e.target.value });
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const data = await axios.post('/users/edit', details);
-            if(data.status === 200) {
+            if (data.status === 200) {
                 window.alert('Data updated successfully');
-                navigate('/profile');               
-            } 
+                navigate('/profile');
+            }
             else {
-                window.alert('Details is unable to update');
+                navigate('/profile');
             }
         }
         catch (error) {
-            window.alert('Server error');
+            window.alert(error);
         }
     }
 
@@ -56,6 +61,7 @@ function Edit() {
                             autoComplete="fname"
                             autoFocus
                             onChange={handleInputs}
+                            value={details.firstName}
                         />
                         <TextField
                             margin="normal"
@@ -67,6 +73,7 @@ function Edit() {
                             id="lname"
                             autoComplete="lname"
                             onChange={handleInputs}
+                            value={details.lastName}
                         />
                         <TextField
                             margin="normal"
@@ -78,15 +85,28 @@ function Edit() {
                             autoComplete="email"
                             autoFocus
                             onChange={handleInputs}
+                            disabled
+                            value={details.email}
                         />
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
+                            name="oldpassword"
+                            label="Old Password"
                             type="password"
-                            id="password"
+                            id="oldpassword"
+                            autoComplete="old-password"
+                            onChange={handleInputs}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="newpassword"
+                            label="New Password"
+                            type="password"
+                            id="newpassword"
                             autoComplete="current-password"
                             onChange={handleInputs}
                         />
