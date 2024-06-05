@@ -16,7 +16,7 @@ function Skills(skill) {
         skillcontent: "",
     }]);
 
-    const addProject = () => {
+    const addSkill = () => {
         setSkills([...skills, { skilltitle: "", skillcontent: "" }]);
     }
 
@@ -50,7 +50,6 @@ function Skills(skill) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained' onClick={addProject}>Add Skill</Button>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     {skills.map((project, index) => {
                         return (
@@ -83,16 +82,18 @@ function Skills(skill) {
                             </Grid>
                         )
                     })}
-                    <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                    <div className={`${styles.flex} ${styles.alignCenter}`}>
+                        <Button variant='contained' onClick={addSkill}>Add Skill</Button>
                         <Button
                             type="submit"
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mx: 2}}
                             onClick={handleSubmit}
                         >
                             Save
                         </Button>
-                    </Box>
+
+                    </div>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>

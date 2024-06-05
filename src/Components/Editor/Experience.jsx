@@ -18,7 +18,7 @@ function Experience(exp) {
     }]);
 
     const addExperience = () => {
-        setExperience([...experience, { exptitle: "", expdescription: "", tenure:"" }]);
+        setExperience([...experience, { exptitle: "", expdescription: "", tenure: "" }]);
     }
 
     const handleInputs = (index, e) => {
@@ -51,11 +51,10 @@ function Experience(exp) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained' onClick={addExperience}>Add Experience</Button>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     {experience.map((exp, index) => {
                         return (
-                            <Grid container spacing={2} key={index} sx={{mt: 3}}>
+                            <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
 
                                 {/* Languages */}
                                 <Grid item xs={12}>
@@ -100,16 +99,17 @@ function Experience(exp) {
                         )
                     })}
                 </Box>
-                <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                <div className={`${styles.flex} ${styles.mt2}`}>
+                    <Button variant='contained' onClick={addExperience}>Add Experience</Button>
                     <Button
                         type="submit"
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mx: 2}}
                         onClick={handleSubmit}
                     >
                         Save
                     </Button>
-                </Box>
+                </div>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
         </ThemeProvider>

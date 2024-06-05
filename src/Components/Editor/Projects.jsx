@@ -50,7 +50,6 @@ function Projects(proj) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained' onClick={addProject}>Add Project</Button>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     {projects.map((project, index) => {
                         return (
@@ -87,16 +86,17 @@ function Projects(proj) {
                             </Grid>
                         )
                     })}
-                    <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                    <div className={`${styles.flex} ${styles.mt2}`}>
+                        <Button variant='contained' onClick={addProject}>Add Project</Button>
                         <Button
                             type="submit"
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mx: 2}}
                             onClick={handleSubmit}
                         >
                             Save
                         </Button>
-                    </Box>
+                    </div>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>

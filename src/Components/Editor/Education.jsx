@@ -52,7 +52,7 @@ function Education(edu) {
                     </Typography>
 
                 </Box>
-                <Button variant='contained' onClick={addEducation}>Add Education Qualification</Button>
+
                 <Box component="form" noValidate sx={{ mb: 3 }}>
                     {education.map((edu, index) => (
                         <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
@@ -105,16 +105,17 @@ function Education(edu) {
                         </Grid>
                     ))}
                 </Box>
-                <Box className={`${styles.flex} ${styles.justifyBetween}`}>
+                <div className={`${styles.flex}`}>
+                    <Button variant='contained' onClick={addEducation}>Add Education Qualification</Button>
                     <Button
                         type="submit"
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mx: 2}}
                         onClick={handleSubmit}
                     >
                         Save
                     </Button>
-                </Box>
+                </div>
             </Box>
         </ThemeProvider>
     );
