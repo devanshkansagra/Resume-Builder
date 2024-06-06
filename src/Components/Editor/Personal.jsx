@@ -8,32 +8,29 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types';
+
+import { useContext } from 'react';
+import ResumeContext from '../../context/ResumeContext';
 import styles from './css/editor.module.css'
 
 const defaultTheme = createTheme();
 
 export default function Personal(personal) {
 
-  const [personalData, setPersonalData] = React.useState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      github: "",
-      linkedin: "",
-  })
+  const { personalInfo, setpersonalInfo } = useContext(ResumeContext);
 
   let name, value;
   const handlePersonalData = (e) => {
-      name = e.target.name;
-      value = e.target.value;
+    name = e.target.name;
+    value = e.target.value;
 
-      setPersonalData({...personalData, [name]:value});
+    setpersonalInfo({ ...personalInfo, [name]: value });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    personal.getData(personalData);
+    // personal.getData(personalData);
+    // setpersonalInfo(personalData);
   }
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -64,7 +61,8 @@ export default function Personal(personal) {
                   id="firstName"
                   label="First Name"
                   onChange={handlePersonalData}
-                  // autofocus
+                  value={personalInfo.firstName}
+                // autofocus
                 />
               </Grid>
 
@@ -79,6 +77,7 @@ export default function Personal(personal) {
                   name="lastName"
                   autoComplete="family-name"
                   onChange={handlePersonalData}
+                  value={personalInfo.lastName}
                 />
               </Grid>
 
@@ -93,6 +92,7 @@ export default function Personal(personal) {
                   id="emailId"
                   label="Email Address"
                   onChange={handlePersonalData}
+                  value={personalInfo.email}
                 />
               </Grid>
 
@@ -106,6 +106,7 @@ export default function Personal(personal) {
                   label="Phone Number"
                   name="phone"
                   onChange={handlePersonalData}
+                  value={personalInfo.phone}
                 />
               </Grid>
 
@@ -119,7 +120,8 @@ export default function Personal(personal) {
                   id="github"
                   label="Github Profile"
                   onChange={handlePersonalData}
-                  // autofocus
+                  value={personalInfo.github}
+                // autofocus
                 />
               </Grid>
 
@@ -134,6 +136,7 @@ export default function Personal(personal) {
                   name="linkedin"
                   autoComplete="family-name"
                   onChange={handlePersonalData}
+                  value={personalInfo.linkedin}
                 />
               </Grid>
             </Grid>

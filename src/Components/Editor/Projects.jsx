@@ -7,30 +7,26 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
+import ResumeContext from '../../context/ResumeContext';
 
 const defaultTheme = createTheme();
-function Projects(proj) {
+function Projects() {
 
-    const [projects, setProjects] = React.useState([{
-        projtitle: "",
-        projdescription: "",
-    }]);
+    const { projInfo, setProjInfo, addProjInfo } = React.useContext(ResumeContext);
 
     const addProject = () => {
-        setProjects([...projects, { projtitle: "", projdescription: "" }]);
+        setProjInfo([...projInfo, { projtitle: "", projdescription: "" }]);
     }
 
     const handleInputs = (index, e) => {
-        const newProjects = [...projects];
-        // "In the newProjects array, find the project object at the specified index, and update the property with the name e.target.name to the new value e.target.value"
-        newProjects[index][e.target.name] = e.target.value;
-        setProjects(newProjects);
+       const newProj = [...projInfo];
+       newProj[index][e.target.name] = e.target.value;
+       setProjInfo(newProj);
     }
 
     const handleSubmit = (e) => {
-        // console.log(projects);
         e.preventDefault();
-        proj.getProject(projects);
+        addProjInfo(projInfo);
     }
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -51,7 +47,7 @@ function Projects(proj) {
 
                 </Box>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
-                    {projects.map((project, index) => {
+                    {projInfo.map((project, index) => {
                         return (
                             <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
 
@@ -64,6 +60,7 @@ function Projects(proj) {
                                         fullWidth
                                         id="title"
                                         label="Project Title"
+                                        value={project.projtitle}
                                         onChange={(e) => handleInputs(index, e)}
                                     // autofocus
                                     />
@@ -75,6 +72,7 @@ function Projects(proj) {
                                         required
                                         fullWidth
                                         id="description"
+                                        value={project.projdescription}
                                         label="Project Description"
                                         // autofocus
                                         multiline
@@ -91,7 +89,7 @@ function Projects(proj) {
                         <Button
                             type="submit"
                             variant="contained"
-                            sx={{ mx: 2}}
+                            sx={{ mx: 2 }}
                             onClick={handleSubmit}
                         >
                             Save

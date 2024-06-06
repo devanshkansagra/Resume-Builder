@@ -8,30 +8,26 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import { Link } from 'react-router-dom'
 import styles from './css/editor.module.css'
+import ResumeContext from '../../context/ResumeContext';
 
 const defaultTheme = createTheme();
 function Education(edu) {
 
-    const [education, setEducation] = React.useState([{
-        insName: "",
-        tenure: "",
-        qualification: "",
-        scores: ""
-    }])
+    const { eduInfo, setEduInfo, addEduInfo } = React.useContext(ResumeContext);
 
     const addEducation = () => {
-        setEducation([...education, { insName: "", tenure: "", qualification: "", scores: "" }])
+        setEduInfo([...eduInfo, { insName: "", tenure: "", qualification: "", scores: "" }])
     }
 
     const handleInputs = (index, e) => {
-        const newEdu = [...education];
+        const newEdu = [...eduInfo];
         newEdu[index][e.target.name] = e.target.value;
-        setEducation(newEdu);
+        setEduInfo(newEdu);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        edu.getEducation(education);
+        addEduInfo(eduInfo);
     }
 
     return (
@@ -54,7 +50,7 @@ function Education(edu) {
                 </Box>
 
                 <Box component="form" noValidate sx={{ mb: 3 }}>
-                    {education.map((edu, index) => (
+                    {eduInfo.map((edu, index) => (
                         <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
                             <Grid item xs={12}>
                                 <TextField
@@ -65,6 +61,7 @@ function Education(edu) {
                                     id="insName"
                                     label="Institution Name"
                                     onChange={(e) => handleInputs(index, e)}
+                                    value={edu.insName}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -76,6 +73,7 @@ function Education(edu) {
                                     id="tenure"
                                     label="Education Tenure"
                                     onChange={(e) => handleInputs(index, e)}
+                                    value={edu.tenure}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -87,6 +85,7 @@ function Education(edu) {
                                     id="Qualification"
                                     label="Education Qualification"
                                     onChange={(e) => handleInputs(index, e)}
+                                    value={edu.qualification}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -98,6 +97,7 @@ function Education(edu) {
                                     id="scores"
                                     label="Final Scores"
                                     onChange={(e) => handleInputs(index, e)}
+                                    value={edu.scores}
                                 />
                             </Grid>
                             <br />

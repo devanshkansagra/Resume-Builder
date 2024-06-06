@@ -7,30 +7,27 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './css/editor.module.css'
+import ResumeContext from '../../context/ResumeContext';
 
 const defaultTheme = createTheme();
-function Experience(exp) {
+function Experience() {
 
-    const [experience, setExperience] = React.useState([{
-        exptitle: "",
-        expdescription: "",
-        tenure: "",
-    }]);
+    const { expInfo, setExpInfo, addExpInfo } = React.useContext(ResumeContext);
 
     const addExperience = () => {
-        setExperience([...experience, { exptitle: "", expdescription: "", tenure: "" }]);
+        setExpInfo([...expInfo, { exptitle: "", expdescription: "", tenure: ""}]);
     }
 
     const handleInputs = (index, e) => {
-        const newExperience = [...experience];
-        newExperience[index][e.target.name] = e.target.value;
-        setExperience(newExperience);
+        const {name, value} = e.target;
+        const newExp = [...expInfo];
+        newExp[index][name] = value;
+        setExpInfo(newExp);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(experience)
-        exp.getExp(experience);
+        addExpInfo(expInfo);
     }
 
     return (
@@ -52,7 +49,7 @@ function Experience(exp) {
 
                 </Box>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
-                    {experience.map((exp, index) => {
+                    {expInfo.map((exp, index) => {
                         return (
                             <Grid container spacing={2} key={index} sx={{ mt: 3 }}>
 
@@ -65,6 +62,7 @@ function Experience(exp) {
                                         fullWidth
                                         id="exptitle"
                                         label="Experience Title"
+                                        value={exp.exptitle}
                                         // autofocus
                                         onChange={(e) => handleInputs(index, e)}
                                     />
@@ -77,6 +75,7 @@ function Experience(exp) {
                                         fullWidth
                                         id="tenure"
                                         label="From-To"
+                                        value={exp.tenure}
                                         // autofocus
                                         onChange={(e) => handleInputs(index, e)}
                                     />
@@ -89,6 +88,7 @@ function Experience(exp) {
                                         fullWidth
                                         id="expdescription"
                                         label="Experience Description"
+                                        value={exp.expdescription}
                                         // autofocus
                                         multiline
                                         rows={6}
@@ -104,7 +104,7 @@ function Experience(exp) {
                     <Button
                         type="submit"
                         variant="contained"
-                        sx={{ mx: 2}}
+                        sx={{ mx: 2 }}
                         onClick={handleSubmit}
                     >
                         Save

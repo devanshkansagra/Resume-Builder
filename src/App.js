@@ -10,6 +10,7 @@ import Profile from './Components/Profile/Profile'
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword';
 import ResetPassword from './Components/Reset/ResetPassword';
 import Edit from './Components/EditProfile/Edit'
+import ResumeContextProvider from './context/ResumeContextProvider';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/editor' element={<Editor />} />
+        <Route path='/editor' element={<ResumeContextProvider><Editor /></ResumeContextProvider>} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/forgot' element={<ForgotPassword />} />
         <Route path='/resetPassword' element={<ResetPassword />} />

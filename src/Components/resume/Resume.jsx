@@ -9,20 +9,20 @@ import Box from '@mui/material/Box';
 import ReactToPrint from 'react-to-print';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/Download';
+import ResumeContext from '../../context/ResumeContext';
 
-function Resume({ personal, skills, proj, edu, exp }) {
+function Resume() {
 
-    let arrSkills = Object.values(skills);
-    let arrProj = Object.values(proj);
-    let arrExp = Object.values(exp);
-    let arrEdu = Object.values(edu);
     const pdfRef = useRef();
+
+    const { personalInfo, skillInfo, expInfo, projInfo, eduInfo } = React.useContext(ResumeContext);
+
     return (
         <>
             <div className={`${styles.flex} ${styles.justifyCenter}`}>
                 <Box>
                     <ReactToPrint
-                        documentTitle={personal.firstName +" "+personal.lastName+`'s Resume`}
+                        documentTitle={personalInfo.firstName + " " + personalInfo.lastName + `'s Resume`}
                         trigger={() => {
                             return (
                                 <Button variant='contained'>Download Resume <DownloadIcon></DownloadIcon></Button>
@@ -35,24 +35,24 @@ function Resume({ personal, skills, proj, edu, exp }) {
                 <div className={styles.paper} ref={pdfRef}>
                     <div>
                         <div className={styles.name}>
-                            <Typography variant='h4' color='textSecondary' align='center' mb={2} fontWeight={'bold'}>{personal.firstName || 'Your'} {personal.lastName || 'Name'}</Typography>
+                            <Typography variant='h4' color='textSecondary' align='center' mb={2} fontWeight={'bold'}>{personalInfo.firstName || 'Your'} {personalInfo.lastName || 'Name'}</Typography>
                         </div>
                         <div className={`${styles.flex} ${styles.justifyBetween} ${styles.wrap}`}>
                             <div className={styles.flex}>
                                 <GitHubIcon fontSize='small'></GitHubIcon>
-                                <Typography><a href={`https://github.com/${personal.github}`}>&nbsp;{personal.github || 'Your Github'}</a></Typography>
+                                <Typography><a href={`https://github.com/${personalInfo.github}`}>&nbsp;{personalInfo.github || 'Your Github'}</a></Typography>
                             </div>
                             <div className={styles.flex}>
                                 <LinkedInIcon fontSize='small'></LinkedInIcon>
-                                <Typography><a href={`https://linkedin.com/in/${personal.linkedin}`}>&nbsp;{personal.linkedin || 'Your LinkedIn'}</a></Typography>
+                                <Typography><a href={`https://linkedin.com/in/${personalInfo.linkedin}`}>&nbsp;{personalInfo.linkedin || 'Your LinkedIn'}</a></Typography>
                             </div>
                             <div className={styles.flex}>
                                 <PhoneIcon fontSize='small'></PhoneIcon>
-                                <Typography><span>&nbsp;{personal.phone || 'Your Phone'}</span></Typography>
+                                <Typography><span>&nbsp;{personalInfo.phone || 'Your Phone'}</span></Typography>
                             </div>
                             <div className={styles.flex}>
                                 <MailIcon fontSize='small'></MailIcon>
-                                <Typography><span>&nbsp;{personal.email || 'Your Mail'}</span></Typography>
+                                <Typography><span>&nbsp;{personalInfo.email || 'Your Mail'}</span></Typography>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@ function Resume({ personal, skills, proj, edu, exp }) {
                     {/* Skills Section */}
                     <div>
                         <Typography fontWeight={'bold'}>Skills</Typography>
-                        {arrSkills.map((skill, index) => (
+                        {skillInfo.map((skill, index) => (
                             <div key={index}>
                                 <span>{skill?.skilltitle}</span>:&nbsp;
                                 <span className={styles.textSecondary}>
@@ -76,7 +76,7 @@ function Resume({ personal, skills, proj, edu, exp }) {
                     {/* Professional Experience Section */}
                     <div>
                         <Typography fontWeight={'bold'}>Professional Experience</Typography>
-                        {arrExp.map((experience, index) => {
+                        {expInfo.map((experience, index) => {
                             return (
                                 <div key={index}>
                                     <div className={`${styles.flex} ${styles.justifyBetween}`}><Typography>{experience?.exptitle}</Typography>
@@ -95,7 +95,7 @@ function Resume({ personal, skills, proj, edu, exp }) {
                     {/* Projects Section */}
                     <div>
                         <Typography fontWeight={'bold'}>Projects</Typography>
-                        {arrProj.map((project, index) => (
+                        {projInfo.map((project, index) => (
                             <div key={index}>
                                 <Typography>{project?.projtitle}</Typography>
                                 <Typography paragraph color={'textSecondary'}>
@@ -110,14 +110,12 @@ function Resume({ personal, skills, proj, edu, exp }) {
                     {/* Education Section */}
                     <div>
                         <Typography fontWeight={'bold'}>Education</Typography>
-                        {arrEdu.map((education, index) => {
+                        {eduInfo.map((education, index) => {
                             return (
                                 <div key={index}>
-                                    <Typography>
-                                        {education.insName} - {education?.tenure}
-                                        <Typography color={'textSecondary'}>{education?.qualification}</Typography>
-                                        <Typography color={'textSecondary'}>{education?.scores}</Typography>
-                                    </Typography>
+                                    <Typography>{education.insName} - {education?.tenure}</Typography>
+                                    <Typography color={'textSecondary'}>{education?.qualification}</Typography>
+                                    <Typography color={'textSecondary'}>{education?.scores}</Typography>
                                     <br />
                                 </div>
                             )
