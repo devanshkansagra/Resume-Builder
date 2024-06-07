@@ -57,7 +57,7 @@ export default function SignUp() {
       } else {
         window.alert("Registered successfully");
         setUserInfo(response); // Update userInfo with the response data
-        navigate('/profile');
+        navigate('/login');
       }
     } catch (error) {
       console.log(error);

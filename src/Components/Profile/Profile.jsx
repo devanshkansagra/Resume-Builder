@@ -56,16 +56,16 @@ function Profile() {
                     <div className={`${styles.flex} ${styles.justifyCenter}`}>
                         <table cellPadding="10">
                             <tr>
-                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>Name:</Typography> </td>
-                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.firstName} {details.lastName}</Typography></td>
+                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>First Name:</Typography> </td>
+                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.firstName}</Typography></td>
+                            </tr>
+                            <tr>
+                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>Last Name:</Typography> </td>
+                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.lastName}</Typography></td>
                             </tr>
                             <tr>
                                 <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>Email ID: </Typography></td>
                                 <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.email}</Typography></td>
-                            </tr>
-                            <tr>
-                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>Password: </Typography></td>
-                                <td className={`${styles.fontMedium} ${styles.p4}`}><Typography>{details.password}</Typography></td>
                             </tr>
                             <tr>
                                 <td><Link className={`${styles.btnPrimary}`} to="/edit">Edit Profile</Link></td>

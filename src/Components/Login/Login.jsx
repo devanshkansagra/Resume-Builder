@@ -16,6 +16,8 @@ import styles from './login.module.css';
 import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react';
 
+import axios from 'axios';
+
 function Login() {
 
   const navigate = useNavigate();
@@ -28,24 +30,12 @@ function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   })
 
-  const login = loginData;
-
   const {setAuth} = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { email, password } = login;
     try {
-      const data = await fetch("/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email, password
-        })
-      });
+      const data = await axios.post('/users/login',loginData);
       if(data.status === 200) {
         setAuth(true);
         navigate('/editor');
@@ -53,6 +43,10 @@ function Login() {
 
       else if(data.status === 401) {
         window.alert("Invalid Credentials");
+      }
+
+      else if(data.status === 404) {
+        window.alert("User Not found");
       }
 
       else if(data.status === 500) {

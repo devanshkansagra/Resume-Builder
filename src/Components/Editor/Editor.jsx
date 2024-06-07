@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './css/editor.module.css'
 import { Paper } from '@mui/material'
 import Resume from '../resume/Resume'
@@ -13,8 +13,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Typography } from '@mui/material'
 import { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -57,26 +55,6 @@ function Editor() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const navigate = useNavigate();
-    useEffect(() => {
-        const callLogin = async () => {
-            try {
-                const response = await axios.post("/login");
-                if(response) {
-                    navigate('/editor');
-                }
-                else {
-                    throw new Error("Didn't get the response");
-                }
-            }
-            catch(error) {
-                // navigate('/login')
-                console.log(error);
-            }
-        }
-        callLogin();
-    }, [navigate]);
 
     const [personalData, setpersonalData] = React.useState({});
     const [skill, setSkill] = React.useState({});
