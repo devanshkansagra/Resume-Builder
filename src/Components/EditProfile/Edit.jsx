@@ -33,7 +33,8 @@ function Edit() {
                 window.alert('Data updated successfully');
                 navigate('/profile');
             }
-            else {
+            else if(data.status === 401) {
+                window.alert("Unauthorized");
                 navigate('/profile');
             }
         }
