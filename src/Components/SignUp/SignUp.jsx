@@ -45,8 +45,6 @@ export default function SignUp() {
         body: JSON.stringify({ firstName, lastName, email, password })
       });
 
-      const response = await data.json();
-
       if (data.status === 422) {
         window.alert("Details are not entered properly");
       } else if (data.status === 409) {
