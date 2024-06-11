@@ -47,14 +47,14 @@ export default function SignUp() {
 
       if (data.status === 422) {
         window.alert("Details are not entered properly");
-      } else if (data.status === 409) {
+      } 
+      else if (data.status === 409) {
         window.alert("Email already in use");
         navigate('/signup');
-      } else if (!response) {
-        window.alert("Unable to register user");
-      } else {
+      } 
+      else {
         window.alert("Registered successfully");
-        setUserInfo(response); // Update userInfo with the response data
+        setUserInfo(data.json()); // Update userInfo with the response data
         navigate('/login');
       }
     } catch (error) {
