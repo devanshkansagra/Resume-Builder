@@ -94,26 +94,26 @@ function Editor() {
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                 <Tab label="Personal Information" {...a11yProps(0)} />
-                                <Tab label="Skills" {...a11yProps(1)} />
-                                <Tab label="Experience" {...a11yProps(2)} />
-                                <Tab label="Projects" {...a11yProps(3)} />
-                                <Tab label="Education" {...a11yProps(4)} />
+                                <Tab label="Education" {...a11yProps(1)} />
+                                <Tab label="Skills" {...a11yProps(2)} />
+                                <Tab label="Experience" {...a11yProps(3)} />
+                                <Tab label="Projects" {...a11yProps(4)} />
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
                             <Personal getData={getData} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <Skills getSkill={getSkill} />
+                            <Education getEducation={getEducation} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
-                            <Experience getExp={getExp} />
+                            <Skills getSkill={getSkill} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={3}>
-                            <Projects getProject={getProject} />
+                            <Experience getExp={getExp} />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={4}>
-                            <Education getEducation={getEducation} />
+                            <Projects getProject={getProject} />
                         </CustomTabPanel>
                     </Box>
                 </Paper>
@@ -121,10 +121,10 @@ function Editor() {
                     <div ref={pdfRef}>
                         <Resume
                             personal={personalData}
+                            edu={education}
                             skills={skill}
                             exp={experience}
                             proj={project}
-                            edu={education}
 
                         />
                     </div>

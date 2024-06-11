@@ -33,6 +33,7 @@ function Resume() {
             </div>
             <Paper elevation={5}>
                 <div className={styles.paper} ref={pdfRef}>
+
                     <div>
                         <div className={styles.name}>
                             <Typography variant='h4' color='textSecondary' align='center' mb={2} fontWeight={'bold'}>{personalInfo.firstName || 'Your'} {personalInfo.lastName || 'Name'}</Typography>
@@ -57,7 +58,21 @@ function Resume() {
                         </div>
                     </div>
                     <hr />
-
+                    {/* Education Section */}
+                    <div>
+                        <Typography fontWeight={'bold'}>Education</Typography>
+                        {eduInfo.map((education, index) => {
+                            return (
+                                <div key={index}>
+                                    <Typography>{education.insName} - {education?.tenure}</Typography>
+                                    <Typography color={'textSecondary'}>{education?.qualification}</Typography>
+                                    <Typography color={'textSecondary'}>{education?.scores}</Typography>
+                                    <br />
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <hr />
                     {/* Skills Section */}
                     <div>
                         <Typography fontWeight={'bold'}>Skills</Typography>
@@ -103,23 +118,6 @@ function Resume() {
                                 </Typography>
                             </div>
                         ))}
-                    </div>
-                    <br />
-                    <hr />
-
-                    {/* Education Section */}
-                    <div>
-                        <Typography fontWeight={'bold'}>Education</Typography>
-                        {eduInfo.map((education, index) => {
-                            return (
-                                <div key={index}>
-                                    <Typography>{education.insName} - {education?.tenure}</Typography>
-                                    <Typography color={'textSecondary'}>{education?.qualification}</Typography>
-                                    <Typography color={'textSecondary'}>{education?.scores}</Typography>
-                                    <br />
-                                </div>
-                            )
-                        })}
                     </div>
                     <br />
                 </div>
